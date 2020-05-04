@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href="/vendors/semantic/semantic.min.css" />
+    <link rel='stylesheet' href="/dist/app.css" />
+    {% block stylesheet %}{% endblock %}
+</head>
+
+<body>
+    <div class="main-container">
+        {% block body %}{% endblock %}
+    </div>
+
+    <div id="base-modal" class="tiny ui modal">
+        <div class="header"></div>
+        <div class="content">
+            <p></p>
+        </div>
+        <div class="actions">
+            <button class="ui green labeled icon button approve btn-approve">
+                <i class="check circle icon"></i>
+                Yes
+            </button>
+            <button class="ui red right labeled icon button cancel btn-cancel">
+                <i class="times circle icon"></i>
+                Cancel
+            </button>
+            <button class="ui red right labeled icon button cancel btn-close">
+                <i class="times circle icon"></i>
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/vendors/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/vendors/semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="/dist/app.js"></script>
+    {% block javascript %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href="/vendors/semantic/semantic.min.css" />
+    <link rel='stylesheet' href="/dist/main.css" />
+</head>
+
+<body>
+
+    <div id="main-sidebar" class="ui sidebar vertical left menu overlay visible">
+        <div id="main-title">Make IT Easy</div>
+        <div class="ui accordion">
+            {% for item in menu %}
+            {{ menu(item) }}
+            {% endfor %}
+        </div>
+
+        {% for sitem in menu %}
+        {{ smenu(sitem) }}
+        {% endfor %}
+
+    </div>
+    </div>
+
+    <div class="pusher">
+        <div id="main-navigator" class="ui menu asd borderless">
+            <a class="item openbtn">
+                <i class="icon content"></i> Navigations
+            </a>
+            <div class="right menu">
+                <div class="ui dropdown icon item">
+                    {{ user.name }}
+                    <div class="menu">
+                        <a class="item mie-action" data-location="/logout" data-target="_self">
+                            <i class="mini icon power off"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-container" class="asd">
+            <div id="main-tab-bar">
+                <div class="ui labeled" data-tab="tab-home">
+                    <a class="ui label">Home</a>
+                </div>
+            </div>
+            <div id="tab-home" class="ui tab active segment main-content">
+                <iframe src="{{ homePath }}"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/vendors/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/vendors/semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="/dist/main.js"></script>
+</body>
+
+</html>

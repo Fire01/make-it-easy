@@ -1,0 +1,63 @@
+{% extends '_base/layout.twig' %}
+
+
+{% block stylesheet %}
+<link rel='stylesheet' href="/vendors/datatables/datatables.min.css" />
+<link rel='stylesheet' href="/dist/view.css" />
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="/vendors/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="/dist/view.js"></script>
+<script type="text/javascript">
+    let datatables = $('#data-table').DataTable({{ configs | json_encode }});
+    viewCfg = {form_path: "{{form_path}}"}
+</script>
+
+{% endblock %}
+
+{% block body %}
+    <div id="data-header" class="ui stackable grid">
+        <div class="row">
+            <div class="twelve wide column container-actions">
+                {% if form_path is defined %}
+                <a class="tiny ui button mie-action" data-location="{{ form_path }}" data-title="New {{ title }}">
+                    <i class="file icon"></i> New
+                </a>
+                {% endif %}
+                <button class="tiny ui button btn-reload">
+                    <i class="refresh icon"></i> Reload
+                </button>
+                <button class="tiny ui button btn-csv">
+                    <i class="file code icon"></i> CSV
+                </button>
+                <button class="tiny ui button btn-excel">
+                    <i class="file excel icon"></i> Excel
+                </button>
+                <button class="tiny ui button btn-print">
+                    <i class="print icon"></i> Print
+                </button>
+                <button class="tiny ui button btn-delete">
+                    <i class="times circle icon"></i> Delete
+                </button>
+            </div>
+           
+            <div class="four wide column">
+                <div class="ui two icon input">
+                    <input type="text" class="input-search" placeholder="Search">
+                    <i class="times circle link icon clear-search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 id="view-title">{{ title }}</h1>
+    <table id="data-table" class="ui celled table">
+        <thead>
+            <tr>
+                {% for head in header %}
+                <th>{{ head.title }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+    </table>
+{% endblock %}

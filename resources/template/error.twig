@@ -1,0 +1,14 @@
+{% extends '_base/layout.twig' %}
+
+{% block body %}
+
+<div class="ui negative message error-container">
+    <div class="content">
+        <h1><i class="exclamation triangle icon"></i> {{ status }}</h1>
+        <h3>{{ message }}</h3>
+        {% if error.stack is defined %}
+        <pre style="background: rgba(0,0,0,.87);padding: 10px 15px;border-radius: 3px;font-family: monospace;color: #bcbdbd;">{{ error.stack }}</pre>
+        {% endif %}
+    </div>    
+</div>
+{% endblock %}

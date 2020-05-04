@@ -1,0 +1,63 @@
+{% extends '_base/layout.twig' %}
+
+{% block stylesheet %}
+<link rel='stylesheet' href="/dist/login.css" />
+<script>if(window.self !== window.top) parent.document.location = "{{ route('index') }}"</script>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $('.message .close').click((e) => $(e.target).closest('.message').transition('fade'));
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div class="ui centered card">
+
+    <div class="content">
+        <h2><i class="lock alternate icon"></i>Login</h2>
+    </div>
+    <div class="content ui form">
+        <form method="POST" action="/login">
+            {% if error is defined %}
+                <div class="ui negative message centered">
+                    <i class="close icon"></i>
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <div class="field">
+                <label>User</label>
+                <div class="ui left icon input">
+                    <input type="text" name="username" value="{{ username }}" required>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <div class="ui left icon input">
+                    <input type="password" name="password" required>
+                    <i class="key icon"></i>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="extra content">
+                <div class="ui two buttons">
+                    <button class="ui primary labeled icon button" type="submit">
+                        <i class="sign in alternate icon"></i>
+                        Login
+                    </button>
+                    <!--
+                    <button class="ui green right labeled icon button" type="button">
+                        <i class="user alternate icon"></i>
+                        Register
+                    </button>
+                    -->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
