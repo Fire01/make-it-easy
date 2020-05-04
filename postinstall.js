@@ -5,8 +5,6 @@ const envfile = require('envfile');
 const sourcePath = path.join(__dirname, '.env');
 const uuid = require("uuid");
 
-if(__dirname == process.cwd()) return false;
-
 console.log("\x1b[42m", `================= Copy Default Source =================`, "\x1b[0m");
 
 fs.open(sourcePath, 'r', function (err, fd) {
