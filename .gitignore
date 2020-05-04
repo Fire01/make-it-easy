@@ -1,5 +1,7 @@
 node_modules/
-database/
+semantic/dist/
+semantic/src/
+semantic/task/
 package-lock.json
 public/dist/
 .env

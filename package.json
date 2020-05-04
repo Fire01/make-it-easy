@@ -1,6 +1,6 @@
 {
   "name": "make-it-easy",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon test.js",
@@ -9,6 +9,17 @@
     "debug": "npm-run-all -p build:watch nodemon",
     "postinstall": "node postinstall.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fire01/make-it-easy.git"
+  },
+  "keywords": [],
+  "author": "fire01 <riyanfirdaus90@yahoo.co.id>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fire01/make-it-easy/issues"
+  },
+  "homepage": "https://github.com/Fire01/make-it-easy",
   "nodemonConfig": {
     "ext": "js,mjs,json,html,twig",
     "ignore": [
@@ -46,5 +57,9 @@
     "sass-loader": "^8.0.2",
     "webpack": "^4.43.0",
     "webpack-fix-style-only-entries": "^0.4.0"
+  },
+  "description": "",
+  "directories": {
+    "lib": "lib"
   }
 }
