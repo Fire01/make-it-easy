@@ -32,3 +32,4 @@ $(".btn-delete").click(() => {
 
 $(".input-search").on('keyup click', (e) => datatables.search(e.target.value).draw());
 $(".clear-search").click(() => {$(".input-search").val("");datatables.search("").draw()});
+$.fn.dataTable.ext.errMode = 'none';

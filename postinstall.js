@@ -1,30 +1,35 @@
 const fs = require("fs");
-const ncp = require('ncp').ncp;
+const copy = require('recursive-copy');
 const path = require('path');
 const envfile = require('envfile');
-const sourcePath = path.join(__dirname, '.env');
+const destPath = process.env.INIT_CWD;
+const envSource = path.join(destPath, '.env');
 const uuid = require("uuid");
 
-console.log("\x1b[42m", `================= Copy Default Source =================`, "\x1b[0m");
+if(__dirname === destPath) return false;
 
-fs.open(sourcePath, 'r', function (err, fd) {
+fs.open(envSource, 'r', function (err, fd) {
     if (err) {
-        fs.writeFile(sourcePath, "", function (err) {
+        fs.writeFile(envSource, "", function (err) {
             if (err) console.log(err);
         });
     }
 
-    let env = envfile.parseFileSync(sourcePath);
+    let env = envfile.parseFileSync(envSource);
 
     env.SECRET = env.SECRET || uuid.v4();
     env.ENV = env.ENV || "development";
     env.PORT = env.PORT || 8000;
     env.TITLE = env.TITLE || "Make It Easy";
 
-    fs.writeFileSync('./.env', envfile.stringifySync(env))
+    fs.writeFileSync(envSource, envfile.stringifySync(env));
+    console.info('Generates Env files');
 });
 
-ncp(path.join(__dirname, '/app'), path.join(process.cwd(), '/app'), function (err) {
-    if (err) return console.error(err);
-    console.log("\x1b[42m", `================= Postinstall Finished =================`, "\x1b[0m");
-});
+copy(path.join(__dirname, '/app'), path.join(destPath, '/app'))
+    .then(function (results) {
+        console.info('Copied ' + results.length + ' files');
+    })
+    .catch(function (error) {
+        console.error('Copy failed: ' + error);
+    });
