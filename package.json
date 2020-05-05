@@ -1,6 +1,6 @@
 {
   "name": "make-it-easy",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon test.js",
@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "autoprefixer": "^9.7.6",
-    "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "csurf": "^1.11.0",

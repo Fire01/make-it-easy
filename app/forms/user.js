@@ -1,6 +1,6 @@
 const Form = require("make-it-easy").form;
 const User = require("../models/user");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = new Form(User, {
     name: 'form_user',
@@ -9,7 +9,11 @@ module.exports = new Form(User, {
     items: {
         username: { unique: true, required: true },
         name: { required: true},
-        password: { type: 'password', required: true},
+        password: {
+            type: 'password', 
+            required: (data, editMode) => editMode && data._id ? false : true, 
+            hide: (data, editMode) => !editMode
+        },
         roles: {type: 'select', multiple: true}
     },
     beforeSave: async(doc, prevDoc) => {
@@ -20,12 +24,7 @@ module.exports = new Form(User, {
             doc.password = prevDoc.password;
         }
     },
-    beforeOpen: async (properties, data, editMode) => {  
-        if(editMode){
-            properties.password.required = data._id ? false : true;
-            data.password = "";
-        }
-        
-        properties.password.hide = !editMode;
+    beforeOpen: async (properties, data, editMode) => {
+       data.password = "";
     }
 });
