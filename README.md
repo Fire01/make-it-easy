@@ -1,7 +1,8 @@
 # Make It Easy
-Express based with prebuilt nedb as database and fomantic/semantic ui as user interface. Come with concept Controller, Form and View(not view like ejs, twig and others, its view for display the data).
+Express based with prebuilt nedb as database, fomantic/semantic ui as user interface and use DataTables to display the data. 
+Come with concept Controller, Form and View(not view like ejs, twig and others, its view to display the data).
 
-Just some experiment, never tested in production(because never developed nodejs apps before). Its easy to write simple crud, but hard for advance, maybe.
+Just some experiment, never tested in production.
 
 
 ## Installation
@@ -28,7 +29,7 @@ app.start();
 ```
 
 # API
-Not all api described here, confused what should i put there :(
+Maybe not all api described here, doc need to be updated.
 
 
 ## Model
@@ -159,6 +160,9 @@ module.exports = new Form(User, {
             * `items` (like level 2 of form items, must have attribute form items)
     * **readers**: (function|boolean) function to determine can access the form or not
     * **authors**: (function|boolean) function to determine can save/edit/remove the form or not
+    * **javascripts**: (string|array) add js files to the form (relative path)
+    * **styles**: (string|array) add css files to the form (relative path)
+    * **variables**: (object) add variables to the form with name `variables`. (can be string, object, array, function or async function)
     * **beforeOpen**: (function) event before open the document
     * **beforeSave**: (function) event before save the document
     * **afterSave**: (function) event after save the document
@@ -196,6 +200,7 @@ module.exports = new View(User, {
         * `text` for roles
     * **column**: Column list you want to display in view.
         * **data**: (string) attributes from model
+        * **type**: (string) currently only support `date`, `datetime`
         * **title**: (string) header title
         * **render**: (function) render function, has parameter `col` and `rows`
     * **readers**: (function|boolean) function to determine can access the form or not
@@ -204,7 +209,11 @@ module.exports = new View(User, {
 
 
 # Contributing
-You think this is useful and want to make it better or maybe beng-beng, contact me or fork and make pr
+1. Fork it
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
 
 # Lisence
-If its useful for you, use whatever you want as long you not create something that against the laws, but if not useful its forbidden for you :)
+MIT
