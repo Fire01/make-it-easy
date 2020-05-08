@@ -1,17 +1,27 @@
 {% extends '_base/layout.twig' %}
 
-
 {% block stylesheet %}
     <link rel='stylesheet' href="/dist/form.css" />
+    {% for style in form.styles %}
+    <link rel='stylesheet' href="{{ style }}" />
+    {% endfor %}
 {% endblock %}
 
 {% block javascript %}
     <script type="text/javascript" src="/dist/form.js"></script>
+    {% if form.variables is defined and form.variables %}
+    <script type="text/javascript">
+        const variables = {{ form.variables | json_encode }}
+    </script>
+    {% endif %}
+    {% for javascript in form.javascripts %}
+    <script type="text/javascript" src="{{ javascript }}"></script>
+    {% endfor %}
 {% endblock %}
 
 {% block body %}
 
     {{ error(errors) }}
     {{ form(form) }}
-
+    
 {% endblock %}
