@@ -21,7 +21,7 @@ $('.ui.dropdown').each((i, t) => {
             });
         }
     }else{
-        $(t).dropdown({clearable: true});
+        $(t).dropdown({clearable: true, fullTextSearch: true});
     }
     
 });
