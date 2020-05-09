@@ -2,7 +2,7 @@
 Express based with prebuilt nedb as database, fomantic/semantic ui as user interface and use DataTables to display the data. 
 Come with concept Controller, Form and View(not view like ejs, twig and others, its view to display the data).
 
-Just some experiment, never tested in production.
+Just some experiment, never tested in production. Minimum node.js version v12.
 
 
 ## Installation

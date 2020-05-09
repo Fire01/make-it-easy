@@ -1,10 +1,17 @@
-tabs = {lastActive: null};
+tabs = {lastActive: null, strict: false};
 
 addTab = (title, url) => {
     let id = uuid();
+    console.log(url);
     
     let baseUrl = url.indexOf("#") >= 0 ? url.split("#")[0] : url.split("?")[0];
-    let isExist = Object.keys(tabs).map(el => tabs[el]).find(el => el && el.baseUrl == baseUrl);
+    let isExist = null;
+    if(tabs.strict){
+        isExist = Object.keys(tabs).map(el => tabs[el]).find(el => el && el.baseUrl == baseUrl);
+    }else{
+        isExist = Object.keys(tabs).map(el => tabs[el]).find(el => el && el.url === url);
+    }
+    
     if(isExist){
         activeTab(isExist.id);
         return false;

@@ -5,26 +5,24 @@ const bcrypt = require('bcryptjs');
 module.exports = new Form(User, {
     name: 'form_user',
     path: '/user',
-    acl: '*',
+    acl: 'Admin',
     items: {
         username: { unique: true, required: true },
-        name: { required: true},
-        password: {
-            type: 'password', 
-            required: (data, editMode) => editMode && data._id ? false : true, 
-            hide: (data, editMode) => !editMode
-        },
-        roles: {type: 'select', multiple: true}
+        name: { required: true },
+        password: {type: 'password', required: true},
+        roles: { type: 'select', multiple: true }
     },
-    beforeSave: async(doc, prevDoc) => {
+    beforeSave: async (doc, prevDoc) => {
         if (doc.password) {
             const hash = await bcrypt.hashSync(doc.password, 10);
             doc.password = hash;
-        } else {            
+        } else {
             doc.password = prevDoc.password;
         }
     },
     beforeOpen: async (properties, data, editMode) => {
-       data.password = "";
+        properties.password.hide = !editMode;
+        properties.password.required = editMode && !data._id ? true : false;
+        data.password = "";
     }
 });
