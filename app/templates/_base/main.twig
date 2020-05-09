@@ -31,14 +31,19 @@
                 <i class="icon content"></i> Navigations
             </a>
             <div class="right menu">
+                {% if user %}
                 <div class="ui dropdown icon item">
                     {{ user.name }}
                     <div class="menu">
+                        <a class="item mie-action" data-location="/change-password" data-title="Change Password">
+                            <i class="mini icon key"></i> Change Password
+                        </a>
                         <a class="item mie-action" data-location="/logout" data-target="_self">
                             <i class="mini icon power off"></i> Logout
                         </a>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
         <div id="main-container" class="asd">
