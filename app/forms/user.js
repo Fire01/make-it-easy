@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 module.exports = new Form(User, {
     name: 'form_user',
     path: '/user',
-    acl: 'Admin',
+    acl: '*',
     items: {
         username: { unique: true, required: true },
         name: { required: true },
