@@ -8,6 +8,7 @@ const NedbSessionStore = require('nedb-session-store')(session);
 const minifyHTML = require('express-minify-html');
 const express = require('express');
 const http = require('http');
+const Database = require('./lib/database');
 Utils = require('./lib/utils');
 
 class MIE {
@@ -33,7 +34,7 @@ class MIE {
             resave: true,
             saveUninitialized: false,
             cookie: { secure: false, maxAge: 7 * 24 * 3600 * 1000 },
-            store: new NedbSessionStore({filename: path.join(process.cwd(), 'database/session.db')})
+            store: new NedbSessionStore({filename: path.join(process.cwd(), 'database/session.db'), autoCompactInterval: 60 * 60 * 1000})
         }));
 
         this.app.use(express.static(path.join(__dirname, '/resources/public')));
@@ -97,6 +98,8 @@ class MIE {
                 error: process.env.ENV === 'production' ? {} : err
             });
         });
+
+        Database.autoCompact();
     }
 
     listen(callback) {
