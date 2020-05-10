@@ -8,6 +8,8 @@ $('.ui.radio.checkbox').checkbox();
 
 $('.ui.dropdown').each((i, t) => {
     const dataset = t.dataset;
+    let required = $(t).attr('required');
+    
     if(dataset.type){
         if(dataset.type === 'model'){
             $(t).dropdown({
@@ -18,12 +20,13 @@ $('.ui.dropdown').each((i, t) => {
                     throttle: 200
                 },
                 saveRemoteData: false
-            });
+            });            
         }
     }else{
         $(t).dropdown({clearable: true, fullTextSearch: true});
     }
-    
+
+    $(t).attr('required', required);
 });
 
 deleteDoc = () => {
