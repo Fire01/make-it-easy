@@ -20,6 +20,8 @@ class MIE {
     static model = require('./lib/model');
 
     constructor() {
+        Database.autoCompact();
+
         this.app = express();
         this.app.set('env', process.env.ENV || 'development');
         Object.keys(Utils.configs).forEach(el => this.app.locals[el] = Utils.configs[el]);
@@ -61,8 +63,6 @@ class MIE {
         if (args.views) this.configs.views = args.views;
         if (args.templates) this.configs.templates = args.templates;
         if (args.public) this.configs.public = args.public;
-
-        setTimeout(() => Database.autoCompact(args.compactInterval ? args.compactInterval : null), 1000);
     }
 
     start(port) {
@@ -72,7 +72,7 @@ class MIE {
         if (!this.configs.templates) this.configs.templates = path.join(process.cwd(), "/app/templates");
 
         if (this.configs.public) this.app.use(express.static(Utils.configs.public));
-        this.app.use(require('./lib/router'));
+        
         this.app.set('views', Utils.configs.templates);
         this.app.set('view engine', 'twig');
 
@@ -81,7 +81,10 @@ class MIE {
         port = this.normalizePort(port || process.env.PORT || 3000);
         this.app.set('port', port);
 
+        this.app.use(require('./lib/router'));
+
         this.server.listen(port);
+
         this.server.on('listening', () => this.listen());
         this.server.on('error', this.onError);
 
