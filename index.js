@@ -20,8 +20,6 @@ class MIE {
     static model = require('./lib/model');
 
     constructor() {
-        Database.autoCompact();
-
         this.app = express();
         this.app.set('env', process.env.ENV || 'development');
         Object.keys(Utils.configs).forEach(el => this.app.locals[el] = Utils.configs[el]);
@@ -63,6 +61,7 @@ class MIE {
         if (args.views) this.configs.views = args.views;
         if (args.templates) this.configs.templates = args.templates;
         if (args.public) this.configs.public = args.public;
+        if (args.autoCompact) this.configs.autoCompact = args.autoCompact;
     }
 
     start(port) {
@@ -70,6 +69,8 @@ class MIE {
         if (!this.configs.forms) this.configs.forms = path.join(process.cwd(), "/app/forms");
         if (!this.configs.views) this.configs.views = path.join(process.cwd(), "/app/views");
         if (!this.configs.templates) this.configs.templates = path.join(process.cwd(), "/app/templates");
+
+        Database.autoCompact(this.configs.autoCompact);
 
         if (this.configs.public) this.app.use(express.static(Utils.configs.public));
         
