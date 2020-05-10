@@ -61,6 +61,8 @@ class MIE {
         if (args.views) this.configs.views = args.views;
         if (args.templates) this.configs.templates = args.templates;
         if (args.public) this.configs.public = args.public;
+
+        setTimeout(() => Database.autoCompact(args.compactInterval ? args.compactInterval : null), 1000);
     }
 
     start(port) {
@@ -98,8 +100,6 @@ class MIE {
                 error: process.env.ENV === 'production' ? {} : err
             });
         });
-
-        Database.autoCompact();
     }
 
     listen(callback) {
