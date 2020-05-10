@@ -162,7 +162,7 @@ module.exports = new Form(User, {
     * **authors**: (function|boolean) function to determine can save/edit/remove the form or not
     * **javascripts**: (string|array) add js files to the form (relative path)
     * **styles**: (string|array) add css files to the form (relative path)
-    * **variables**: (object) add variables to the form with name `variables`. (can be string, object, array, function or async function)
+    * **variables**: (object) add variables to the form with name `vars`. (can be string, object, array, function or async function)
     * **beforeOpen**: (function) event before open the document
     * **beforeSave**: (function) event before save the document
     * **afterSave**: (function) event after save the document

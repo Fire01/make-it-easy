@@ -9,9 +9,9 @@
 
 {% block javascript %}
     <script type="text/javascript" src="/dist/form.js"></script>
-    {% if form.variables is defined and form.variables %}
+    {% if form.vars is defined and form.vars %}
     <script type="text/javascript">
-        const variables = {{ form.variables | json_encode }}
+        const vars = {{ form.vars | json_encode }}
     </script>
     {% endif %}
     {% for javascript in form.javascripts %}

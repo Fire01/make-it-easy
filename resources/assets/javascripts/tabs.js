@@ -2,7 +2,6 @@ tabs = {lastActive: null, strict: false};
 
 addTab = (title, url) => {
     let id = uuid();
-    console.log(url);
     
     let baseUrl = url.indexOf("#") >= 0 ? url.split("#")[0] : url.split("?")[0];
     let isExist = null;
