@@ -20,7 +20,7 @@
     <div id="data-header" class="ui stackable grid">
         <div class="row">
             <div class="twelve wide column container-actions">
-                {% if form_path is defined %}
+                {% if form_path is defined and form_path %}
                 <a class="tiny ui button mie-action" data-location="{{ form_path }}" data-title="New {{ title }}">
                     <i class="file icon"></i> New
                 </a>
