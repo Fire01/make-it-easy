@@ -12,17 +12,17 @@ module.exports = new Form(User, {
         password: {type: 'password', required: true},
         roles: { type: 'select', multiple: true }
     },
-    beforeSave: async (doc, prevDoc) => {
-        if (doc.password) {
-            const hash = await bcrypt.hashSync(doc.password, 10);
-            doc.password = hash;
+    beforeSave: async (args) => {
+        if (args.doc.password) {
+            const hash = await bcrypt.hashSync(args.doc.password, 10);
+            args.doc.password = hash;
         } else {
-            doc.password = prevDoc.password;
+            args.doc.password = args.prevDoc.password;
         }
     },
-    beforeOpen: async (properties, data, editMode) => {
-        properties.password.hide = !editMode;
-        properties.password.required = editMode && !data._id ? true : false;
-        data.password = "";
+    beforeOpen: async (args) => {
+        args.items.password.hide = !args.editMode;
+        args.items.password.required = args.editMode && !args.data._id ? true : false;
+        args.data.password = "";
     }
 });
