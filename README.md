@@ -57,9 +57,9 @@ module.exports = User;
 * **timestamp**: (boolean) options to create attribute `_created` and `_updated` (optional, default to true)
 * **properties**: (object) list of model properties. some of options not implemented yet like `unique` and some other can be loaded for form options
     * **required**: (boolean) requires options, if its set to `true` but the attribute not set, when save the model it will fail.
-* **beforeSave**: (function) event before save data to database, has parameter `doc`
+* **beforeSave**: (function) event before save data to database, has parameter `args`
 * **save**: (method) save data to database
-* **afterSave**: (function) event after save data to database, has parameter `doc`
+* **afterSave**: (function) event after save data to database, has parameter `args`
 * [static]**find**: (method) function for find document. return array objct. params:
     * **conditions**: (object) condition/option to find doc using nedb (optional)
     * **limit**: (number) condition/option to find doc using nedb (optional, default to 0/unlimited)
@@ -114,24 +114,22 @@ module.exports = new Form(User, {
     acl: '*',
     items: {
         username: { unique: true, required: true },
-        name: { required: true},
-        password: {
-            type: 'password', 
-            required: (data, editMode) => editMode && data._id ? false : true, 
-            hide: (data, editMode) => !editMode
-        },
-        roles: {type: 'select', multiple: true}
+        name: { required: true },
+        password: {type: 'password', required: true},
+        roles: { type: 'select', multiple: true }
     },
-    beforeSave: async(doc, prevDoc) => {
-        if (doc.password) {
-            const hash = await bcrypt.hashSync(doc.password, 10);
-            doc.password = hash;
-        } else {            
-            doc.password = prevDoc.password;
+    beforeSave: async (args) => {
+        if (args.doc.password) {
+            const hash = await bcrypt.hashSync(args.doc.password, 10);
+            args.doc.password = hash;
+        } else {
+            args.doc.password = args.prevDoc.password;
         }
     },
-    beforeOpen: async (properties, data, editMode) => {
-       data.password = "";
+    beforeOpen: async (args) => {
+        args.items.password.hide = !args.editMode;
+        args.items.password.required = args.editMode && !args.data._id ? true : false;
+        args.data.password = "";
     }
 });
 ```
