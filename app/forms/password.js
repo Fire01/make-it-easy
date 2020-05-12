@@ -14,7 +14,7 @@ module.exports = new Form(null, {
         new_password: {type: 'password', required: true},
         confirm_password: {type: 'password', required: true},
     },
-    callback: async(req, res, next, self) => {
+    callback: async(req, res, next, formConfig) => {
         if(!req.session.user) return next(createError(401, 'Please login to view this page.'));
         let data = req.body['form_change_password'];
         
@@ -25,7 +25,7 @@ module.exports = new Form(null, {
         if(!checkPassword) errors.push({message: "Current Password is incorrect!"});
         if(data.new_password !== data.confirm_password) errors.push({message: "New Password and Confirm Password doesn't match!"});
 
-        if(errors.length) return res.render('_base/form', {form: self.getFormConfig(), errors: errors});
+        if(errors.length) return res.render('_base/form', {form: formConfig, errors: errors});
 
         const hash = await bcrypt.hashSync(data.new_password, 10);
         user.password = hash;
