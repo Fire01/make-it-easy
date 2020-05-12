@@ -37,9 +37,11 @@
                 <button class="tiny ui button btn-print">
                     <i class="print icon"></i> Print
                 </button>
+                {% if canDelete %}
                 <button class="tiny ui button btn-delete">
                     <i class="times circle icon"></i> Delete
                 </button>
+                {% endif %}
             </div>
            
             <div class="four wide column">
