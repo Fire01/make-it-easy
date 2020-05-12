@@ -13,13 +13,8 @@ Utils = require('./lib/utils');
 
 class MIE {
 
-    configs = Utils.configs;
-    static controller = require('./lib/controller');
-    static view = require('./lib/view');
-    static form = require('./lib/form');
-    static model = require('./lib/model');
-
     constructor() {
+        this.configs = Utils.configs;
         this.app = express();
         this.app.set('env', process.env.ENV || 'development');
         Object.keys(Utils.configs).forEach(el => this.app.locals[el] = Utils.configs[el]);
@@ -140,5 +135,10 @@ class MIE {
         }
     }
 }
+
+MIE.controller = require('./lib/controller');
+MIE.view = require('./lib/view');
+MIE.form = require('./lib/form');
+MIE.model = require('./lib/model');
 
 module.exports = MIE;
