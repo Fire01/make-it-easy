@@ -1,7 +1,7 @@
 const Model = require("make-it-easy").model;
 
 class User extends Model{
-    // V12
+    // V12 or higher
     /*
     static properties = {
         username: {unique: true, required: true},

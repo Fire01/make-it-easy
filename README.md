@@ -2,7 +2,7 @@
 Express based with prebuilt nedb as database, fomantic/semantic ui as user interface and use DataTables to display the data. 
 Come with concept Controller, Form and View(not view like ejs, twig and others, its view to display the data).
 
-Just some experiment, never tested in production. Minimum node.js version v12.
+Just some experiment, never tested in production. Support node.js v10.
 
 
 ## Installation
@@ -38,17 +38,28 @@ Curently avaiable only for nedb model
 const Model = require("make-it-easy").model;
 
 class User extends Model{
+    // V12 or higher
+    /*
     static properties = {
         username: {unique: true, required: true},
         name: {required: true},
         password: {required: true, protected: true},
         roles: {options: ["Admin"]}
     }
+    */
     
     async getRoles(){
         return this.roles;
     }
 };
+
+// V10 or higher
+User.properties = {
+    username: {unique: true, required: true},
+    name: {required: true},
+    password: {required: true, protected: true},
+    roles: {options: ["Admin"]}
+}
 
 module.exports = User;
 ```
