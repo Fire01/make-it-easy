@@ -27,9 +27,9 @@ fs.open(envSource, 'r', function (err, fd) {
 });
 
 copy(path.join(__dirname, '/app'), path.join(destPath, '/app'))
-    .then(function (results) {
-        console.info('Copied ' + results.length + ' files');
-    })
-    .catch(function (error) {
-        console.error('Copy failed: ' + error);
-    });
+.then(function (results) {
+    console.info('Copied ' + results.length + ' files');
+})
+.catch(function (error) {
+    console.error('File already exist');
+});
