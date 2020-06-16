@@ -1,6 +1,6 @@
 {
   "name": "make-it-easy",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon test.js",

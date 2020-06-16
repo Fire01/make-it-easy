@@ -5,7 +5,12 @@ $('body').on('click', 'a.mie-action', e => {
 openLink = (e) => {
     let el = e.target;
     let data = el.dataset;
-    if(!data.location) return false;
+    if(!data.location){
+        if(el.parentElement && el.parentElement.nodeName === "A"){
+            data = el.parentElement.dataset;
+            if(!data.location) return false;
+        }
+    }
     let target = data.target ? data.target : "_tab";
     let title = data.title ? data.title : el.text;
     
