@@ -8,13 +8,22 @@ const uuid = require("uuid");
 
 if(__dirname === destPath) return false;
 
+copy(path.join(__dirname, '/app'), path.join(destPath, '/app')).then(function (results) {
+    console.log("\x1b[42m", `Copy assets ${results.length} files`, "\x1b[0m");
+}).catch(err => {});
+
 fs.open(envSource, 'r', function (err, fd) {
     if (err) {
         fs.writeFile(envSource, "", function (err) {
             if (err) console.log(err);
+            else generateEnv();
         });
+    }else{
+        generateEnv();
     }
+});
 
+function generateEnv(){
     let env = envfile.parseFileSync(envSource);
 
     env.SECRET = env.SECRET || uuid.v4();
@@ -23,13 +32,5 @@ fs.open(envSource, 'r', function (err, fd) {
     env.TITLE = env.TITLE || "Make It Easy";
 
     fs.writeFileSync(envSource, envfile.stringifySync(env));
-    console.info('Generates Env files');
-});
-
-copy(path.join(__dirname, '/app'), path.join(destPath, '/app'))
-.then(function (results) {
-    console.info('Copied ' + results.length + ' files');
-})
-.catch(function (error) {
-    console.error('File already exist');
-});
+    if(!env.SECRET || !env.ENV || !env.PORT || !env.TITLE) console.log("\x1b[42m", `Generates Configurations`, "\x1b[0m");
+}

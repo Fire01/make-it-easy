@@ -58,7 +58,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-fix-style-only-entries": "^0.4.0"
   },
-  "description": "",
+  "description": "Express based with prebuilt nedb as database, fomantic/semantic ui as user interface and use DataTables to display the data. \r Come with concept Controller, Form and View(not view like ejs, twig and others, its view to display the data).",
   "directories": {
     "lib": "lib"
   }
