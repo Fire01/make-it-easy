@@ -13,6 +13,7 @@ openLink = (e) => {
     }
     let target = data.target ? data.target : "_tab";
     let title = data.title ? data.title : el.text;
+    if(!title) title = el.parentElement.text;
     
     switch(target){
         case "_tab":
