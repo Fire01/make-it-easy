@@ -49,6 +49,7 @@ deleteDoc = () => {
     });
 };
 
+
 formItems = (id) => {
     this.id = id;
     this.table = $('#' + id + "_table");
@@ -95,11 +96,11 @@ formItems = (id) => {
         let items = this.items.slice();
 
         this.table.children('tbody').html('');
-        if(editMode) items.push({key: "action", id: "action"});
+        if(editMode) items.push({key: "__action", id: "__action"});
         
         let rows = values.map((el, i) => {
             let cels = items.map(col => {
-                if(col.key === 'action'){
+                if(col.key === '__action'){
                     return `<td>
                                 <button type="button" class="tiny circular ui green icon button" onclick="formItems('${this.id}').edit(${i})">
                                     <i class="edit icon"></i>

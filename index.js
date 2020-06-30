@@ -1,4 +1,5 @@
 require('dotenv').config();
+const pjson = require('./package.json');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -104,6 +105,7 @@ class MIE {
     listen(callback) {
         let addr = this.server.address();
         let bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+        console.log("\x1b[44m", `----------------- MIE Version : ${pjson.version} -----------------`, "\x1b[0m");
         console.log("\x1b[42m", `================= Listening on ${bind} =================`, "\x1b[0m");
         if (callback && typeof callback === "function") callback();
     }
